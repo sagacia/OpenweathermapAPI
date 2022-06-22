@@ -1,4 +1,4 @@
-package APIModels;
+package APITests;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

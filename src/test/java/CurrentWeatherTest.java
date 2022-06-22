@@ -1,9 +1,13 @@
 
-import APIModels.City;
+import APITests.City;
 import Models.DataProvidersForAPI;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.testng.annotations.DataProvider;
+import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import APISettings.*;
 import static io.restassured.RestAssured.given;
@@ -13,7 +17,7 @@ public class CurrentWeatherTest extends DataProvidersForAPI {
 
     @Test(dataProvider = "DataProviderCoordinates")
     public void getWheatherByCoordinates(float coordinates[]){
-        RestAssured.baseURI = APISetup.baseUrl + APISetup.weatherByCoord;
+        RestAssured.baseURI = APISetup.baseUrl + APISetup.weather;
 
         given()
                 .param("appid",APISetup.getAPIkey())
@@ -28,22 +32,7 @@ public class CurrentWeatherTest extends DataProvidersForAPI {
         ;
     }
 
-    @Test(dataProvider = "DataProviderCites")
-    public void getWheatherByCityName(City expectedCity){
-        RestAssured.baseURI = APISetup.baseUrl + APISetup.weatherByCoord;
 
-        given()
-                .param("appid",APISetup.getAPIkey())
-                .param("lon",expectedCity.getCoord().getLon())
-                .param("lat",expectedCity.getCoord().getLat())
-                .contentType(ContentType.JSON)
-                .when().get()
-                .then()
-                .statusCode(200)
-                .body("coord.lon", equalTo ( expectedCity.getCoord().getLon() ))
-                .body("coord.lat", equalTo ( expectedCity.getCoord().getLat() ))
-        ;
-    }
 
 
 }

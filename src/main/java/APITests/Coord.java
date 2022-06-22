@@ -1,4 +1,4 @@
-package APIModels;
+package APITests;
 
 public class Coord {
     private Double lat;

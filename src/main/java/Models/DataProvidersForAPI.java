@@ -1,6 +1,6 @@
 package Models;
-import APIModels.City;
-import APIModels.Coord;
+import APITests.City;
+import APITests.Coord;
 import org.testng.annotations.DataProvider;
 
 public class DataProvidersForAPI {
